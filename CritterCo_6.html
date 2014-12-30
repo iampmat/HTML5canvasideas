@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<style>
+	body {
+    background-color: pink;
+    	padding:20px;
+	}
+	#graphCanvas {
+		background-color: ivory;
+    	border:1px solid white;
+	}
+</style>
+<html>
+<h4>Drag my face onto the canvas plz</h4>
+<canvas id="graphCanvas" height=300 width=300></canvas>
+<img id="img1" src="http://patrickmatherly.com/FaceLogo.png" draggable="true"/>
+
+<script>
+		var canvas = document.getElementById("graphCanvas");
+		var ctx = canvas.getContext("2d");
+		var canvasLeft = canvas.offsetLeft;
+		var canvasTop = canvas.offsetTop;
+		canvas.ondrop = drop;
+		canvas.ondragover = allowDrop;
+//
+		var img = document.getElementById("img1");
+		img.onmousedown = mousedown;
+		img.ondragstart = dragstart;
+
+// this is the mouse position within the drag element
+		var startOffsetX, startOffsetY;
+
+		function allowDrop(ev) {
+    		ev.preventDefault();
+		}
+
+		function mousedown(ev) {
+    		startOffsetX = ev.offsetX;
+    		startOffsetY = ev.offsetY;
+		}
+
+		function dragstart(ev) {
+    		ev.dataTransfer.setData("Text", ev.target.id);
+		}
+
+		function drop(ev) {
+    		ev.preventDefault();
+
+    		var dropX = ev.clientX - canvasLeft - startOffsetX;
+    		var dropY = ev.clientY - canvasTop - startOffsetY;
+    		var id = ev.dataTransfer.getData("Text");
+    		var dropElement = document.getElementById(id);
+
+    // draw the drag image at the drop coordinates
+    		ctx.drawImage(dropElement, dropX, dropY);
+		}
+
+</script>
+
+</body>
+</html>

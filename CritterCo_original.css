@@ -1,0 +1,17 @@
+
+.map {
+  border: 1px solid black;
+  width: 83px;
+  height: 117px;
+  float: left;
+}
+.clearfix {
+  clear: left;
+}
+#map {
+  background-color: #eee;
+}
+
+.dropped {
+  background-color: teal;
+}
